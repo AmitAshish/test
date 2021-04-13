@@ -36,6 +36,10 @@
 #include <microsim/MSVehicleType.h>
 #include "MSDevice_Tripinfo.h"
 #include "MSDevice_Bluelight.h"
+#include <time.h>
+#include <iostream>
+#include <cstdlib>
+using namespace std;
 
 //#define DEBUG_BLUELIGHT
 
@@ -49,8 +53,10 @@ void
 MSDevice_Bluelight::insertOptions(OptionsCont& oc) {
     oc.addOptionSubTopic("Bluelight Device");
     insertDefaultAssignmentOptions("bluelight", "Bluelight Device", oc);
-
-    oc.doRegister("device.bluelight.reactiondist", new Option_Float(25.0));
+    srand((unsigned) time(NULL));
+    float mydistance;
+    mydistance = ((float) rand() / RAND_MAX) * 100 + 200;
+    oc.doRegister("device.bluelight.reactiondist", new Option_Float(mydistance));
     oc.addDescription("device.bluelight.reactiondist", "Bluelight Device", "Set the distance at which other drivers react to the blue light and siren sound");
 }
 
